@@ -99,8 +99,8 @@
         <material-stats-card
           color="green"
           icon="mdi-store"
-          title="Revenue"
-          value="$34,245"
+          title="Closed Issues"
+          value="25"
           sub-icon="mdi-calendar"
           sub-text="Last 24 Hours"
         />
@@ -114,8 +114,8 @@
         <material-stats-card
           color="orange"
           icon="mdi-content-copy"
-          title="Used Space"
-          value="49/50"
+          title="Issues Opened"
+          value="26"
           small-value="GB"
           sub-icon="mdi-alert"
           sub-icon-color="error"
@@ -147,7 +147,7 @@
         <material-stats-card
           color="info"
           icon="mdi-twitter"
-          title="Followers"
+          title="Stargazers"
           value="+245"
           sub-icon="mdi-update"
           sub-text="Just Updated"
@@ -159,8 +159,8 @@
       >
         <material-card
           color="orange"
-          title="Employee Stats"
-          text="New employees on 15th September, 2016"
+          title="Professional Stats"
+          text="Most important jobs"
         >
           <v-data-table
             :headers="headers"
@@ -445,7 +445,7 @@ export default {
         },
         {
           sortable: false,
-          text: 'Name',
+          text: 'Company',
           value: 'name'
         },
         {
@@ -469,31 +469,26 @@ export default {
       ],
       items: [
         {
-          name: 'Dakota Rice',
-          country: 'Niger',
-          city: 'Oud-Tunrhout',
+          name: 'Banco do Brasil Você Azul',
+          country: 'Brazil',
+          city: 'Remote',
           salary: '$35,738'
         },
         {
-          name: 'Minerva Hooper',
-          country: 'Curaçao',
-          city: 'Sinaai-Waas',
+          name: '2Mundos',
+          country: 'Brazil / USA',
+          city: 'São Paulo',
           salary: '$23,738'
         }, {
-          name: 'Sage Rodriguez',
-          country: 'Netherlands',
-          city: 'Overland Park',
+          name: 'IBM',
+          country: 'Brazil',
+          city: 'São Paulo',
           salary: '$56,142'
         }, {
-          name: 'Philip Chanley',
-          country: 'Korea, South',
-          city: 'Gloucester',
+          name: 'Tagview Tech',
+          country: 'Brazil',
+          city: 'Remote',
           salary: '$38,735'
-        }, {
-          name: 'Doris Greene',
-          country: 'Malawi',
-          city: 'Feldkirchen in Kārnten',
-          salary: '$63,542'
         }
       ],
       tabs: 0,

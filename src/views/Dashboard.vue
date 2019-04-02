@@ -4,19 +4,20 @@
     fluid
     grid-list-xl
   >
-    <v-layout wrap>
+    <v-layout
+     v-show="!loading"
+     wrap>
       <v-flex
         md12
         sm12
         lg4
       >
         <material-chart-card
-          :data="dailySalesChart.data"
-          :options="dailySalesChart.options"
+          :data="additionsChart"
           color="info"
           type="Line"
         >
-          <h4 class="title font-weight-light">Daily Sales</h4>
+          <h4 class="title font-weight-light">Daily Sales {{additionsChart}}</h4>
           <p class="category d-inline-flex font-weight-light">
             <v-icon
               color="green"
@@ -46,12 +47,10 @@
       >
         <material-chart-card
           :data="emailsSubscriptionChart.data"
-          :options="emailsSubscriptionChart.options"
-          :responsive-options="emailsSubscriptionChart.responsiveOptions"
           color="red"
           type="Bar"
         >
-          <h4 class="title font-weight-light">Email Subscription</h4>
+          <h4 class="title font-weight-light">Email Subscription {{ dailySalesChart.data }} </h4>
           <p class="category d-inline-flex font-weight-light">Last Campaign Performance</p>
 
           <template slot="actions">
@@ -97,10 +96,10 @@
         lg3
       >
         <material-stats-card
+          :value="stargazers_count"
           color="green"
           icon="mdi-store"
           title="Closed Issues"
-          value="25"
           sub-icon="mdi-calendar"
           sub-text="Last 24 Hours"
         />
@@ -114,8 +113,8 @@
         <material-stats-card
           color="orange"
           icon="mdi-content-copy"
-          title="Issues Opened"
-          value="26"
+          title="Open Issues"
+          :value="open_issues"
           small-value="GB"
           sub-icon="mdi-alert"
           sub-icon-color="error"
@@ -132,8 +131,8 @@
         <material-stats-card
           color="red"
           icon="mdi-information-outline"
-          title="Fixed Issues"
-          value="75"
+          title="Forks"
+          :value="forks"
           sub-icon="mdi-tag"
           sub-text="Tracked from Github"
         />
@@ -145,10 +144,10 @@
         lg3
       >
         <material-stats-card
+          :value="stargazers_count"
           color="info"
           icon="mdi-twitter"
           title="Stargazers"
-          value="+245"
           sub-icon="mdi-update"
           sub-text="Just Updated"
         />
@@ -360,28 +359,27 @@
 </template>
 
 <script>
+import axios from 'axios'
+// https://api.github.com/repos/Draichi/cryptocurrency_prediction
+// https://api.github.com/repos/Draichi/cryptocurrency_prediction/stats/contributors
+// https://developer.github.com/v3/repos/statistics/
 export default {
   data () {
     return {
+      loading: false,
+      stargazers_count: null,
+      open_issues: null,
+      forks: null,
+      contributorsTotal: null,
+      additionsChart: null,
+      deletionsChart: {labels: [], series: []},
+      commitsChart: {labels: [], series: []},
       dailySalesChart: {
         data: {
           labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
           series: [
             [12, 17, 7, 17, 23, 18, 38]
           ]
-        },
-        options: {
-          lineSmooth: this.$chartist.Interpolation.cardinal({
-            tension: 0
-          }),
-          low: 0,
-          high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-          chartPadding: {
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0
-          }
         }
       },
       dataCompletedTasksChart: {
@@ -390,19 +388,6 @@ export default {
           series: [
             [230, 750, 450, 300, 280, 240, 200, 190]
           ]
-        },
-        options: {
-          lineSmooth: this.$chartist.Interpolation.cardinal({
-            tension: 0
-          }),
-          low: 0,
-          high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-          chartPadding: {
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0
-          }
         }
       },
       emailsSubscriptionChart: {
@@ -503,6 +488,35 @@ export default {
     complete (index) {
       this.list[index] = !this.list[index]
     }
+  },
+  beforeCreate () {
+    this.loading = true
+    let additions = {labels: [], series: [[]]}
+    let deletions = {labels: [], series: []}
+    let commits = {labels: [], series: []}
+    var obj
+    axios.get('https://api.github.com/repos/Draichi/cryptocurrency_prediction')
+        .then(res => {
+          this.stargazers_count = String(res.data.stargazers_count),
+          this.open_issues = String(res.data.open_issues),
+          this.forks = String(res.data.forks)
+        })
+    axios.get('https://api.github.com/repos/Draichi/cryptocurrency_prediction/stats/contributors')
+        .then(res => {
+          this.numberOfCommits = String(res.data[1].total),
+          this.commitsAuthor = res.data[1].author,
+          obj = res.data[1].weeks
+          for (let key in obj) {
+            additions.labels.push(key)
+            additions.series[0].push(obj[key].a)
+            deletions.labels.push(key)
+            deletions.series.push(obj[key].d)
+            commits.labels.push(key)
+            commits.series.push(obj[key].c)
+          }
+        })
+    this.additionsChart = additions
+    this.loading = false
   }
 }
 </script>

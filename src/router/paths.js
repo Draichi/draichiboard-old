@@ -5,7 +5,7 @@
  */
 export default [
   {
-    path: '/',
+    path: '/dashboard',
     view: 'Dashboard'
   },
   {

@@ -13,30 +13,21 @@
         lg4
       >
         <material-chart-card
-          :data="additionsChart"
+          :data="commitsChart"
+          :options="ChartsOptions"
           color="info"
           type="Line"
         >
-          <h4 class="title font-weight-light">Daily Sales {{additionsChart}}</h4>
-          <p class="category d-inline-flex font-weight-light">
-            <v-icon
-              color="green"
-              small
-            >
-              mdi-arrow-up
-            </v-icon>
-            <span class="green--text">55%</span>&nbsp;
-            increase in today's sales
-          </p>
-
+          <h4 class="title font-weight-light">Commits per week</h4>
+          <p class="category d-inline-flex font-weight-light">All time data of cryptocurrency_prediction project</p>
           <template slot="actions">
             <v-icon
               class="mr-2"
               small
             >
-              mdi-clock-outline
+              mdi-tag
             </v-icon>
-            <span class="caption grey--text font-weight-light">updated 4 minutes ago</span>
+            <span class="caption grey--text font-weight-light">Tracked from Github</span>
           </template>
         </material-chart-card>
       </v-flex>
@@ -46,46 +37,46 @@
         lg4
       >
         <material-chart-card
-          :data="emailsSubscriptionChart.data"
+          :data="additionsChart"
+          :options="ChartsOptions"
+          color="green"
+          type="Bar"
+        >
+          <h4 class="title font-weight-light">Additions on each commit</h4>
+          <p class="category d-inline-flex font-weight-light">All time data of cryptocurrency_prediction project</p>
+          <template slot="actions">
+            <v-icon
+              class="mr-2"
+              small
+            >
+              mdi-tag
+            </v-icon>
+            <span class="caption grey--text font-weight-light">Tracked from Github</span>
+          </template>
+        </material-chart-card>
+      </v-flex>
+      <v-flex
+        md12
+        sm12
+        lg4
+      >
+        <material-chart-card
+          :data="deletionsChart"
+          :options="ChartsOptions"
           color="red"
           type="Bar"
         >
-          <h4 class="title font-weight-light">Email Subscription {{ dailySalesChart.data }} </h4>
-          <p class="category d-inline-flex font-weight-light">Last Campaign Performance</p>
+          <h3 class="title font-weight-light">Deletetions on each commit</h3>
+          <p class="category d-inline-flex font-weight-light">All time data of cryptocurrency_prediction project</p>
 
           <template slot="actions">
             <v-icon
               class="mr-2"
               small
             >
-              mdi-clock-outline
+              mdi-tag
             </v-icon>
-            <span class="caption grey--text font-weight-light">updated 10 minutes ago</span>
-          </template>
-        </material-chart-card>
-      </v-flex>
-      <v-flex
-        md12
-        sm12
-        lg4
-      >
-        <material-chart-card
-          :data="dataCompletedTasksChart.data"
-          :options="dataCompletedTasksChart.options"
-          color="green"
-          type="Line"
-        >
-          <h3 class="title font-weight-light">Completed Tasks</h3>
-          <p class="category d-inline-flex font-weight-light">Last Last Campaign Performance</p>
-
-          <template slot="actions">
-            <v-icon
-              class="mr-2"
-              small
-            >
-              mdi-clock-outline
-            </v-icon>
-            <span class="caption grey--text font-weight-light">campaign sent 26 minutes ago</span>
+            <span class="caption grey--text font-weight-light">Tracked from Github</span>
           </template>
         </material-chart-card>
       </v-flex>
@@ -370,57 +361,26 @@ export default {
       stargazers_count: null,
       open_issues: null,
       forks: null,
+      numberOfCommits: null,
       contributorsTotal: null,
       additionsChart: null,
-      deletionsChart: {labels: [], series: []},
-      commitsChart: {labels: [], series: []},
-      dailySalesChart: {
-        data: {
-          labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-          series: [
-            [12, 17, 7, 17, 23, 18, 38]
-          ]
-        }
-      },
-      dataCompletedTasksChart: {
-        data: {
-          labels: ['12am', '3pm', '6pm', '9pm', '12pm', '3am', '6am', '9am'],
-          series: [
-            [230, 750, 450, 300, 280, 240, 200, 190]
-          ]
-        }
-      },
-      emailsSubscriptionChart: {
-        data: {
-          labels: ['Ja', 'Fe', 'Ma', 'Ap', 'Mai', 'Ju', 'Jul', 'Au', 'Se', 'Oc', 'No', 'De'],
-          series: [
-            [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
-
-          ]
+      commitsAuthor: null,
+      deletionsChart: null,
+      commitsChart: null,
+      ChartsOptions: {
+        axisX: {
+          showLabel: false,
+          showGrid: false
         },
-        options: {
-          axisX: {
-            showGrid: false
-          },
-          low: 0,
-          high: 1000,
-          chartPadding: {
-            top: 0,
-            right: 5,
-            bottom: 0,
-            left: 0
-          }
-        },
-        responsiveOptions: [
-          ['screen and (max-width: 640px)', {
-            seriesBarDistance: 5,
-            axisX: {
-              labelInterpolationFnc: function (value) {
-                return value[0]
-              }
-            }
-          }]
-        ]
+        lineSmooth: true,
+        showPoint: false,
+        showArea: true,
+        chartPadding: {
+          top: 25,
+          right: 0,
+          bottom: 0,
+          left: 15
+        }
       },
       headers: [
         {
@@ -492,30 +452,32 @@ export default {
   beforeCreate () {
     this.loading = true
     let additions = {labels: [], series: [[]]}
-    let deletions = {labels: [], series: []}
-    let commits = {labels: [], series: []}
+    let deletions = {labels: [], series: [[]]}
+    let commits = {labels: [], series: [[]]}
     var obj
     axios.get('https://api.github.com/repos/Draichi/cryptocurrency_prediction')
-        .then(res => {
-          this.stargazers_count = String(res.data.stargazers_count),
-          this.open_issues = String(res.data.open_issues),
-          this.forks = String(res.data.forks)
-        })
+      .then(res => {
+        this.stargazers_count = String(res.data.stargazers_count)
+        this.open_issues = String(res.data.open_issues)
+        this.forks = String(res.data.forks)
+      })
     axios.get('https://api.github.com/repos/Draichi/cryptocurrency_prediction/stats/contributors')
-        .then(res => {
-          this.numberOfCommits = String(res.data[1].total),
-          this.commitsAuthor = res.data[1].author,
-          obj = res.data[1].weeks
-          for (let key in obj) {
-            additions.labels.push(key)
-            additions.series[0].push(obj[key].a)
-            deletions.labels.push(key)
-            deletions.series.push(obj[key].d)
-            commits.labels.push(key)
-            commits.series.push(obj[key].c)
-          }
-        })
-    this.additionsChart = additions
+      .then(res => {
+        this.numberOfCommits = String(res.data[1].total)
+        this.commitsAuthor = res.data[1].author
+        obj = res.data[1].weeks
+        for (let key in obj) {
+          additions.labels.push(key)
+          additions.series[0].push(obj[key].a)
+          deletions.labels.push(key)
+          deletions.series[0].push(obj[key].d)
+          commits.labels.push(key)
+          commits.series[0].push(obj[key].c)
+        }
+        this.additionsChart = additions
+        this.deletionsChart = deletions
+        this.commitsChart = commits
+      })
     this.loading = false
   }
 }

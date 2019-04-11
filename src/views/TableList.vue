@@ -78,6 +78,41 @@
           </v-data-table>
         </material-card>
       </v-flex>
+      <v-flex
+        xs12
+      >
+        <material-card
+          color="orange"
+          title="Professional Stats"
+          text="Most important jobs"
+        >
+          <v-data-table
+            :headers="headers"
+            :items="items"
+            hide-actions
+          >
+            <template
+              slot="headerCell"
+              slot-scope="{ header }"
+            >
+              <span
+                class="font-weight-light text-warning text--darken-3"
+                v-text="header.text"
+              />
+            </template>
+            <template
+              slot="items"
+              slot-scope="{ index, item }"
+            >
+              <td>{{ index + 1 }}</td>
+              <td>{{ item.name }}</td>
+              <td class="text-xs-right">{{ item.salary }}</td>
+              <td class="text-xs-right">{{ item.country }}</td>
+              <td class="text-xs-right">{{ item.city }}</td>
+            </template>
+          </v-data-table>
+        </material-card>
+      </v-flex>
     </v-layout>
   </v-container>
 </template>
@@ -88,58 +123,55 @@ export default {
     headers: [
       {
         sortable: false,
-        text: 'Name',
+        text: 'ID',
+        value: 'id'
+      },
+      {
+        sortable: false,
+        text: 'Company',
         value: 'name'
-      },
-      {
-        sortable: false,
-        text: 'Country',
-        value: 'country'
-      },
-      {
-        sortable: false,
-        text: 'City',
-        value: 'city'
       },
       {
         sortable: false,
         text: 'Salary',
         value: 'salary',
         align: 'right'
+      },
+      {
+        sortable: false,
+        text: 'Country',
+        value: 'country',
+        align: 'right'
+      },
+      {
+        sortable: false,
+        text: 'City',
+        value: 'city',
+        align: 'right'
       }
     ],
     items: [
       {
-        name: 'Dakota Rice',
-        country: 'Niger',
-        city: 'Oud-Tunrhout',
+        name: 'Banco do Brasil Você Azul',
+        country: 'Brazil',
+        city: 'Remote',
         salary: '$35,738'
       },
       {
-        name: 'Minerva Hooper',
-        country: 'Curaçao',
-        city: 'Sinaai-Waas',
+        name: '2Mundos',
+        country: 'Brazil / USA',
+        city: 'São Paulo',
         salary: '$23,738'
       }, {
-        name: 'Sage Rodriguez',
-        country: 'Netherlands',
-        city: 'Overland Park',
+        name: 'IBM',
+        country: 'Brazil',
+        city: 'São Paulo',
         salary: '$56,142'
       }, {
-        name: 'Philip Chanley',
-        country: 'Korea, South',
-        city: 'Gloucester',
+        name: 'Tagview Tech',
+        country: 'Brazil',
+        city: 'Remote',
         salary: '$38,735'
-      }, {
-        name: 'Doris Greene',
-        country: 'Malawi',
-        city: 'Feldkirchen in Kārnten',
-        salary: '$63,542'
-      }, {
-        name: 'Mason Porter',
-        country: 'Chile',
-        city: 'Gloucester',
-        salary: '$78,615'
       }
     ]
   })

@@ -23,13 +23,11 @@
             color="white"
           >
             <v-img
-              :src="logo"
-              height="34"
-              contain
+              src="https://avatars2.githubusercontent.com/u/19378148?s=460&v=4"
             />
           </v-list-tile-avatar>
           <v-list-tile-title class="title">
-            Vuetify MD
+            Draichiboard
           </v-list-tile-title>
         </v-list-tile>
         <v-divider/>
@@ -57,19 +55,6 @@
             v-text="link.text"
           />
         </v-list-tile>
-        <v-list-tile
-          disabled
-          active-class="primary"
-          class="v-list-item v-list__tile--buy"
-          to="/upgrade"
-        >
-          <v-list-tile-action>
-            <v-icon>mdi-package-up</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title class="font-weight-light">
-            Upgrade To PRO
-          </v-list-tile-title>
-        </v-list-tile>
       </v-layout>
     </v-img>
   </v-navigation-drawer>
@@ -94,17 +79,17 @@ export default {
       {
         to: '/user-profile',
         icon: 'mdi-account',
-        text: 'User Profile'
+        text: 'About the Dev'
       },
       {
         to: '/table-list',
         icon: 'mdi-clipboard-outline',
-        text: 'Table List'
+        text: 'Companies'
       },
       {
         to: '/typography',
         icon: 'mdi-format-font',
-        text: 'Typography'
+        text: 'Projects'
       },
       {
         to: '/icons',

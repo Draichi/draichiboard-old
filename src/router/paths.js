@@ -10,7 +10,7 @@ export default [
   },
   {
     path: '/user-profile',
-    name: 'User Profile',
+    name: 'About the dev',
     view: 'UserProfile'
   },
   {

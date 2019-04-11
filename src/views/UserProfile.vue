@@ -7,7 +7,7 @@
       justify-center
       wrap
     >
-      <v-flex
+      <!-- <v-flex
         xs12
         md8
       >
@@ -112,10 +112,10 @@
             </v-container>
           </v-form>
         </material-card>
-      </v-flex>
+      </v-flex> -->
       <v-flex
         xs12
-        md4
+        md8
       >
         <material-card class="v-card-profile">
           <v-avatar

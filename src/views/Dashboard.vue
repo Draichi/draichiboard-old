@@ -155,13 +155,13 @@
         lg4
       >
         <material-chart-card
-          :data="commitsChart"
+          :data="portfolioCommitsChart"
           :options="ChartsOptions"
           color="info"
           type="Line"
         >
           <h4 class="title font-weight-light">Commits per week</h4>
-          <p class="category d-inline-flex font-weight-light">All time data of cryptocurrency_prediction project</p>
+          <p class="category d-inline-flex font-weight-light">All time data of portfolio management project</p>
           <template slot="actions">
             <v-icon
               class="mr-2"
@@ -179,13 +179,13 @@
         lg4
       >
         <material-chart-card
-          :data="additionsChart"
+          :data="portfolioAdditionsChart"
           :options="ChartsOptions"
           color="green"
           type="Bar"
         >
           <h4 class="title font-weight-light">Additions on each commit</h4>
-          <p class="category d-inline-flex font-weight-light">All time data of cryptocurrency_prediction project</p>
+          <p class="category d-inline-flex font-weight-light">All time data of portfolio management project</p>
           <template slot="actions">
             <v-icon
               class="mr-2"
@@ -203,13 +203,13 @@
         lg4
       >
         <material-chart-card
-          :data="deletionsChart"
+          :data="portfolioDeletionsChart"
           :options="ChartsOptions"
           color="red"
           type="Line"
         >
           <h3 class="title font-weight-light">Deletetions on each commit</h3>
-          <p class="category d-inline-flex font-weight-light">All time data of cryptocurrency_prediction project</p>
+          <p class="category d-inline-flex font-weight-light">All time data of portfolio management project</p>
 
           <template slot="actions">
             <v-icon
@@ -284,42 +284,6 @@
           sub-icon="mdi-update"
           sub-text="Just Updated"
         />
-      </v-flex>
-
-      <v-flex
-        xs12
-      >
-        <material-card
-          color="orange"
-          title="Professional Stats"
-          text="Most important jobs"
-        >
-          <v-data-table
-            :headers="headers"
-            :items="items"
-            hide-actions
-          >
-            <template
-              slot="headerCell"
-              slot-scope="{ header }"
-            >
-              <span
-                class="font-weight-light text-warning text--darken-3"
-                v-text="header.text"
-              />
-            </template>
-            <template
-              slot="items"
-              slot-scope="{ index, item }"
-            >
-              <td>{{ index + 1 }}</td>
-              <td>{{ item.name }}</td>
-              <td class="text-xs-right">{{ item.salary }}</td>
-              <td class="text-xs-right">{{ item.country }}</td>
-              <td class="text-xs-right">{{ item.city }}</td>
-            </template>
-          </v-data-table>
-        </material-card>
       </v-flex>
       <!-- <v-flex
         md12
@@ -500,6 +464,10 @@ export default {
   data () {
     return {
       loading: false,
+      portfolioAdditionsChart: null,
+      portfolioDeletionsChart: null,
+      portfolioCommitsChart: null,
+      portfolioObj: null,
       stargazers_count: null,
       open_issues: null,
       forks: null,
@@ -523,66 +491,6 @@ export default {
           bottom: 0,
           left: 15
         }
-      },
-      headers: [
-        {
-          sortable: false,
-          text: 'ID',
-          value: 'id'
-        },
-        {
-          sortable: false,
-          text: 'Company',
-          value: 'name'
-        },
-        {
-          sortable: false,
-          text: 'Salary',
-          value: 'salary',
-          align: 'right'
-        },
-        {
-          sortable: false,
-          text: 'Country',
-          value: 'country',
-          align: 'right'
-        },
-        {
-          sortable: false,
-          text: 'City',
-          value: 'city',
-          align: 'right'
-        }
-      ],
-      items: [
-        {
-          name: 'Banco do Brasil Você Azul',
-          country: 'Brazil',
-          city: 'Remote',
-          salary: '$35,738'
-        },
-        {
-          name: '2Mundos',
-          country: 'Brazil / USA',
-          city: 'São Paulo',
-          salary: '$23,738'
-        }, {
-          name: 'IBM',
-          country: 'Brazil',
-          city: 'São Paulo',
-          salary: '$56,142'
-        }, {
-          name: 'Tagview Tech',
-          country: 'Brazil',
-          city: 'Remote',
-          salary: '$38,735'
-        }
-      ],
-      tabs: 0,
-      list: {
-        0: false,
-        1: false,
-        2: false
       }
     }
   },
@@ -591,7 +499,35 @@ export default {
     let additions = {labels: [], series: [[]]}
     let deletions = {labels: [], series: [[]]}
     let commits = {labels: [], series: [[]]}
+    let portfolioAdditions = {labels: [], series: [[]]}
+    let portfolioDeletions = {labels: [], series: [[]]}
+    let portfolioCommits = {labels: [], series: [[]]}
     var obj
+    axios.get('https://api.github.com/repos/Draichi/Portfolio-Management-list')
+      .then(res => {
+        var portfolioObj = res.data
+        this.portfolioObj = portfolioObj
+      })
+      .catch(e => console.warn(e))
+    axios.get('https://api.github.com/repos/Draichi/Portfolio-Management-list/stats/contributors')
+      .then(res => {
+        this.portfolioNumberOfCommits = String(res.data[0].total)
+        this.portfolioCommitsAuthor = res.data[0].author
+        obj = res.data[0].weeks
+        for (let key in obj) {
+          var date = new Date(obj[key].w * 1000)
+          portfolioAdditions.labels.push(date)
+          portfolioAdditions.series[0].push(obj[key].a)
+          portfolioDeletions.labels.push(date)
+          portfolioDeletions.series[0].push(obj[key].d)
+          portfolioCommits.labels.push(date)
+          portfolioCommits.series[0].push(obj[key].c)
+        }
+        this.portfolioAdditionsChart = portfolioAdditions
+        this.portfolioDeletionsChart = portfolioDeletions
+        this.portfolioCommitsChart = portfolioCommits
+      })
+      .catch(e => console.log(e))
     axios.get('https://api.github.com/repos/Draichi/cryptocurrency_prediction')
       .then(res => {
         this.stargazers_count = String(res.data.stargazers_count)
@@ -617,11 +553,6 @@ export default {
         this.commitsChart = commits
       })
     this.loading = false
-  },
-  methods: {
-    complete (index) {
-      this.list[index] = !this.list[index]
-    }
   }
 }
 </script>

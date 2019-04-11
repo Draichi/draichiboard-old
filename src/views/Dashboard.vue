@@ -5,8 +5,12 @@
     grid-list-xl
   >
     <v-layout
-     v-show="!loading"
-     wrap>
+      v-show="!loading"
+      wrap
+    >
+      <v-flex xs12>
+        <h2>Cryptocurrency Prediction</h2>
+      </v-flex>
       <v-flex
         md12
         sm12
@@ -64,7 +68,7 @@
           :data="deletionsChart"
           :options="ChartsOptions"
           color="red"
-          type="Bar"
+          type="Line"
         >
           <h3 class="title font-weight-light">Deletetions on each commit</h3>
           <p class="category d-inline-flex font-weight-light">All time data of cryptocurrency_prediction project</p>
@@ -102,10 +106,10 @@
         lg3
       >
         <material-stats-card
+          :value="open_issues"
           color="orange"
           icon="mdi-content-copy"
           title="Open Issues"
-          :value="open_issues"
           small-value="GB"
           sub-icon="mdi-alert"
           sub-icon-color="error"
@@ -120,10 +124,10 @@
         lg3
       >
         <material-stats-card
+          :value="forks"
           color="red"
           icon="mdi-information-outline"
           title="Forks"
-          :value="forks"
           sub-icon="mdi-tag"
           sub-text="Tracked from Github"
         />
@@ -143,9 +147,147 @@
           sub-text="Just Updated"
         />
       </v-flex>
+
+      <v-flex xs12><h2>Portfolio Management</h2></v-flex>
       <v-flex
         md12
-        lg6
+        sm12
+        lg4
+      >
+        <material-chart-card
+          :data="commitsChart"
+          :options="ChartsOptions"
+          color="info"
+          type="Line"
+        >
+          <h4 class="title font-weight-light">Commits per week</h4>
+          <p class="category d-inline-flex font-weight-light">All time data of cryptocurrency_prediction project</p>
+          <template slot="actions">
+            <v-icon
+              class="mr-2"
+              small
+            >
+              mdi-tag
+            </v-icon>
+            <span class="caption grey--text font-weight-light">Tracked from Github</span>
+          </template>
+        </material-chart-card>
+      </v-flex>
+      <v-flex
+        md12
+        sm12
+        lg4
+      >
+        <material-chart-card
+          :data="additionsChart"
+          :options="ChartsOptions"
+          color="green"
+          type="Bar"
+        >
+          <h4 class="title font-weight-light">Additions on each commit</h4>
+          <p class="category d-inline-flex font-weight-light">All time data of cryptocurrency_prediction project</p>
+          <template slot="actions">
+            <v-icon
+              class="mr-2"
+              small
+            >
+              mdi-tag
+            </v-icon>
+            <span class="caption grey--text font-weight-light">Tracked from Github</span>
+          </template>
+        </material-chart-card>
+      </v-flex>
+      <v-flex
+        md12
+        sm12
+        lg4
+      >
+        <material-chart-card
+          :data="deletionsChart"
+          :options="ChartsOptions"
+          color="red"
+          type="Line"
+        >
+          <h3 class="title font-weight-light">Deletetions on each commit</h3>
+          <p class="category d-inline-flex font-weight-light">All time data of cryptocurrency_prediction project</p>
+
+          <template slot="actions">
+            <v-icon
+              class="mr-2"
+              small
+            >
+              mdi-tag
+            </v-icon>
+            <span class="caption grey--text font-weight-light">Tracked from Github</span>
+          </template>
+        </material-chart-card>
+      </v-flex>
+      <v-flex
+        sm6
+        xs12
+        md6
+        lg3
+      >
+        <material-stats-card
+          :value="stargazers_count"
+          color="green"
+          icon="mdi-store"
+          title="Closed Issues"
+          sub-icon="mdi-calendar"
+          sub-text="Last 24 Hours"
+        />
+      </v-flex>
+      <v-flex
+        sm6
+        xs12
+        md6
+        lg3
+      >
+        <material-stats-card
+          :value="open_issues"
+          color="orange"
+          icon="mdi-content-copy"
+          title="Open Issues"
+          small-value="GB"
+          sub-icon="mdi-alert"
+          sub-icon-color="error"
+          sub-text="Get More Space..."
+          sub-text-color="text-primary"
+        />
+      </v-flex>
+      <v-flex
+        sm6
+        xs12
+        md6
+        lg3
+      >
+        <material-stats-card
+          :value="forks"
+          color="red"
+          icon="mdi-information-outline"
+          title="Forks"
+          sub-icon="mdi-tag"
+          sub-text="Tracked from Github"
+        />
+      </v-flex>
+      <v-flex
+        sm6
+        xs12
+        md6
+        lg3
+      >
+        <material-stats-card
+          :value="stargazers_count"
+          color="info"
+          icon="mdi-twitter"
+          title="Stargazers"
+          sub-icon="mdi-update"
+          sub-text="Just Updated"
+        />
+      </v-flex>
+
+      <v-flex
+        xs12
       >
         <material-card
           color="orange"
@@ -179,7 +321,7 @@
           </v-data-table>
         </material-card>
       </v-flex>
-      <v-flex
+      <!-- <v-flex
         md12
         lg6
       >
@@ -344,7 +486,7 @@
             </v-tab-item>
           </v-tabs-items>
         </material-card>
-      </v-flex>
+      </v-flex> -->
     </v-layout>
   </v-container>
 </template>
@@ -444,11 +586,6 @@ export default {
       }
     }
   },
-  methods: {
-    complete (index) {
-      this.list[index] = !this.list[index]
-    }
-  },
   beforeCreate () {
     this.loading = true
     let additions = {labels: [], series: [[]]}
@@ -467,11 +604,12 @@ export default {
         this.commitsAuthor = res.data[1].author
         obj = res.data[1].weeks
         for (let key in obj) {
-          additions.labels.push(key)
+          var date = new Date(obj[key].w * 1000)
+          additions.labels.push(date)
           additions.series[0].push(obj[key].a)
-          deletions.labels.push(key)
+          deletions.labels.push(date)
           deletions.series[0].push(obj[key].d)
-          commits.labels.push(key)
+          commits.labels.push(date)
           commits.series[0].push(obj[key].c)
         }
         this.additionsChart = additions
@@ -479,6 +617,11 @@ export default {
         this.commitsChart = commits
       })
     this.loading = false
+  },
+  methods: {
+    complete (index) {
+      this.list[index] = !this.list[index]
+    }
   }
 }
 </script>

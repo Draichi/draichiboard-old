@@ -27,5 +27,8 @@ new Vue({
   i18n,
   router,
   store,
+  beforeCreate () {
+    this.$store.dispatch('getGuthubData')
+  },
   render: h => h(App)
 }).$mount('#app')

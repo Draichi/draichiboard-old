@@ -14,7 +14,13 @@
           text="Created using Roboto Font Family"
         >
           <v-card-text>
-            <v-carousel>
+            <v-carousel
+              dark
+              hide-delimiters
+              interval="1000"
+              max="100"
+              style="height:100%"
+            >
               <v-carousel-item
                 v-for="(item,i) in items"
                 :key="i"
@@ -34,18 +40,66 @@ export default {
   data: () => ({
     items: [
       {
-        src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
+        src: 'https://github.com/Draichi/portfolio/blob/master/src/img/ibm9-1.png?raw=true'
       },
       {
-        src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg'
+        src: 'https://github.com/Draichi/portfolio/blob/master/src/img/ibm5-1.png?raw=true'
       },
       {
-        src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg'
+        src: 'https://github.com/Draichi/portfolio/blob/master/src/img/ibm21-1.png?raw=true'
       },
       {
-        src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
+        src: 'https://github.com/Draichi/portfolio/blob/master/src/img/ibm20-1.png?raw=true'
+      },
+      {
+        src: 'https://github.com/Draichi/portfolio/blob/master/src/img/ibm19-1.png?raw=true'
+      },
+      {
+        src: 'https://github.com/Draichi/portfolio/blob/master/src/img/ibm18-1.png?raw=true'
+      },
+      {
+        src: 'https://github.com/Draichi/portfolio/blob/master/src/img/ibm15-11.png?raw=true'
+      },
+      {
+        src: 'https://github.com/Draichi/portfolio/blob/master/src/img/ibm15-1.png?raw=true'
+      },
+      {
+        src: 'https://github.com/Draichi/portfolio/blob/master/src/img/ibm14-1.png?raw=true'
+      },
+      {
+        src: 'https://github.com/Draichi/portfolio/blob/master/src/img/ibm12-1.png?raw=true'
+      },
+      {
+        src: 'https://github.com/Draichi/portfolio/blob/master/src/img/ibm11-1.png?raw=true'
+      },
+      {
+        src: 'https://github.com/Draichi/portfolio/blob/master/src/img/globo2-1.png?raw=true'
+      },
+      {
+        src: 'https://github.com/Draichi/portfolio/blob/master/src/img/globo1-1.png?raw=true'
+      },
+      {
+        src: 'https://github.com/Draichi/portfolio/blob/master/src/img/audit-720w.png?raw=true'
+      },
+      {
+        src: 'https://github.com/Draichi/portfolio/blob/master/src/img/mudamos-web1-1.png?raw=true'
+      },
+      {
+        src: 'https://github.com/Draichi/portfolio/blob/master/src/img/mudamos-web1-1.png?raw=true'
+      },
+      {
+        src: 'https://github.com/Draichi/portfolio/blob/master/src/img/voceazul_dash.png?raw=true'
+      },
+      {
+        src: 'https://github.com/Draichi/portfolio/blob/master/src/img/voceazul_profile.png?raw=true'
       }
     ]
   })
 }
 </script>
+
+<style>
+.v-window__container--is-active {
+    height: 100% !important;
+}
+</style>

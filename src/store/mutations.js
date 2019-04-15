@@ -1,11 +1,25 @@
 // https://vuex.vuejs.org/en/mutations.html
 
 export default {
-  setLoading (state, payload) {},
-  setPortfolioList (state, payload) {},
-  setCryptoPrediction (state, payload) {},
-  setPortfolioListStats (state, payload) {},
-  setPortfolioContributors (state, payload) {},
-  setCryptoPredictionStats (state, payload) {},
-  setCryptoPredictionContributors (state, payload) {}
+  setLoading (state, payload) {
+    state.loading = payload
+  },
+  setPortfolioList (state, payload) {
+    state.portfolioList = payload
+  },
+  setCryptoPrediction (state, payload) {
+    state.cryptoPrediction = payload
+  },
+  setPortfolioListStats (state, payload) {
+    state.portfolioListStats = payload
+  },
+  setPortfolioContributors (state, payload) {
+    state.portfolioContributors = payload
+  },
+  setCryptoPredictionStats (state, payload) {
+    state.cryptoPredictionStats = payload
+  },
+  setCryptoPredictionContributors (state, payload) {
+    state.cryptoPredictionContributors = payload
+  }
 }

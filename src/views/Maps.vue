@@ -13,7 +13,7 @@
       >
         <material-card
           color="orange"
-          title="Live Projects"
+          title="Professional Stats"
           text="Most important jobs"
         >
           <v-data-table

@@ -15,7 +15,7 @@ export default [
   },
   {
     path: '/table-list',
-    name: 'Table List',
+    name: 'Companies',
     view: 'TableList'
   },
   {
@@ -28,6 +28,7 @@ export default [
   },
   {
     path: '/maps',
+    name: 'Live projects',
     view: 'Maps'
   },
   {

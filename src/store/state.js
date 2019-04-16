@@ -2,10 +2,10 @@
 
 export default {
   loading: false,
-  portfolioList: null,
-  cryptoPrediction: null,
-  portfolioListStats: null,
-  portfolioContributors: null,
-  cryptoPredictionStats: null,
-  cryptoPredictionContributors: null
+  portfolioList: {},
+  cryptoPrediction: {},
+  portfolioListStats: {},
+  portfolioContributors: {},
+  cryptoPredictionStats: {},
+  cryptoPredictionContributors: {}
 }

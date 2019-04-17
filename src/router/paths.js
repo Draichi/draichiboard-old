@@ -5,39 +5,31 @@
  */
 export default [
   {
-    path: '/dashboard',
+    path: '/draichiboard',
     view: 'Dashboard'
   },
   {
-    path: '/user-profile',
+    path: '/about',
     name: 'About the dev',
     view: 'UserProfile'
   },
   {
-    path: '/table-list',
+    path: '/companies',
     name: 'Companies',
     view: 'TableList'
   },
   {
-    path: '/typography',
+    path: '/projects',
+    name: 'Projects',
     view: 'Typography'
   },
   {
-    path: '/icons',
-    view: 'Icons'
-  },
-  {
-    path: '/maps',
+    path: '/live-projects',
     name: 'Live projects',
     view: 'Maps'
   },
   {
     path: '/notifications',
     view: 'Notifications'
-  },
-  {
-    path: '/upgrade',
-    name: 'Upgrade to PRO',
-    view: 'Upgrade'
   }
 ]

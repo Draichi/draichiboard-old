@@ -16,13 +16,13 @@ export default {
         let portfolioObj = res.data
         commit('setPortfolioList', portfolioObj)
       })
-      .catch(e => commit('setError', String(e)))
+      // .catch(e => commit('setError', String(e)))
     axios.get('https://api.github.com/repos/Draichi/cryptocurrency_prediction')
       .then(res => {
         let cryptoPredictionObj = res.data
         commit('setCryptoPrediction', cryptoPredictionObj)
       })
-      .catch(e => commit('setError', String(e)))
+      // .catch(e => commit('setError', String(e)))
     axios.get('https://api.github.com/repos/Draichi/Portfolio-Management-list/stats/contributors')
       .then(res => {
         let resData0 = res.data[0]
@@ -43,7 +43,7 @@ export default {
           commits: portfolioCommits
         })
       })
-      .catch(e => commit('setError', String(e)))
+      // .catch(e => commit('setError', String(e)))
     axios.get('https://api.github.com/repos/Draichi/cryptocurrency_prediction/stats/contributors')
       .then(res => {
         let resData1 = res.data[1]

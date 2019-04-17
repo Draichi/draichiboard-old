@@ -55,6 +55,22 @@
             v-text="link.text"
           />
         </v-list-tile>
+        <a
+          href="https://github.com/Draichi"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <v-list-tile
+            :active-class="color"
+            avatar
+            class="v-list-item"
+          >
+            <v-list-tile-action>
+              <v-icon>mdi-github-circle</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title><span class="white--text">Github</span></v-list-tile-title>
+          </v-list-tile>
+        </a>
       </v-layout>
     </v-img>
   </v-navigation-drawer>
@@ -69,37 +85,31 @@ import {
 
 export default {
   data: () => ({
-    logo: './img/vuetifylogo.png',
     links: [
       {
-        to: '/dashboard',
+        to: '/draichiboard',
         icon: 'mdi-view-dashboard',
-        text: 'Dashboard'
+        text: 'Draichiboard'
       },
       {
-        to: '/user-profile',
+        to: '/about',
         icon: 'mdi-account',
         text: 'About the Dev'
       },
       {
-        to: '/table-list',
+        to: '/companies',
         icon: 'mdi-clipboard-outline',
         text: 'Companies'
       },
       {
-        to: '/typography',
-        icon: 'mdi-format-font',
+        to: '/projects',
+        icon: 'mdi-animation',
         text: 'Projects'
       },
       {
-        to: '/icons',
-        icon: 'mdi-chart-bubble',
-        text: 'Icons'
-      },
-      {
-        to: '/maps',
-        icon: 'mdi-map-marker',
-        text: 'Maps'
+        to: '/live-projects',
+        icon: 'mdi-cube-outline',
+        text: 'Live Projects'
       },
       {
         to: '/notifications',

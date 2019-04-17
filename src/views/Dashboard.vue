@@ -4,6 +4,24 @@
     fluid
     grid-list-xl
   >
+    <v-container
+      v-show="loading"
+      fluid>
+      <v-layout row>
+        <v-flex>
+          <v-layout
+            justify-center>
+            <div class="text-xs-center">
+              <v-progress-circular
+                :size="80"
+                indeterminate
+                color="accent"
+              />
+            </div>
+          </v-layout>
+        </v-flex>
+      </v-layout>
+    </v-container>
     <v-layout
       v-show="!loading"
       wrap

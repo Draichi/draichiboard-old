@@ -83,7 +83,7 @@
         <router-link
           v-ripple
           class="toolbar-items"
-          to="/user-profile"
+          to="/about"
         >
           <v-icon color="tertiary">mdi-account</v-icon>
         </router-link>

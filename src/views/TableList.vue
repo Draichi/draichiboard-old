@@ -12,8 +12,8 @@
         xs12
       >
         <material-card
-          color="orange"
-          title="Professional Stats"
+          :color="color"
+          title="Main companies I worked with"
           text="Most important jobs"
         >
           <v-data-table
@@ -32,13 +32,12 @@
             </template>
             <template
               slot="items"
-              slot-scope="{ index, item }"
+              slot-scope="{ item }"
             >
-              <td>{{ index + 1 }}</td>
               <td>{{ item.name }}</td>
-              <td class="text-xs-right">{{ item.salary }}</td>
               <td class="text-xs-right">{{ item.country }}</td>
               <td class="text-xs-right">{{ item.city }}</td>
+              <td class="text-xs-right">{{ item.salary }}</td>
             </template>
           </v-data-table>
         </material-card>
@@ -53,19 +52,8 @@ export default {
     headers: [
       {
         sortable: false,
-        text: 'ID',
-        value: 'id'
-      },
-      {
-        sortable: false,
         text: 'Company',
         value: 'name'
-      },
-      {
-        sortable: false,
-        text: 'Salary',
-        value: 'salary',
-        align: 'right'
       },
       {
         sortable: false,
@@ -78,32 +66,45 @@ export default {
         text: 'City',
         value: 'city',
         align: 'right'
+      },
+      {
+        sortable: false,
+        text: 'Annual Salary (BRL)',
+        value: 'salary',
+        align: 'right'
       }
     ],
     items: [
+      {
+        name: '2Mundos',
+        country: 'Brazil / USA',
+        city: 'São Paulo',
+        salary: '$56,142'
+      },
+      {
+        name: 'IBM',
+        country: 'Brazil / USA',
+        city: 'São Paulo',
+        salary: '$38,735'
+      },
+      {
+        name: 'Tagview Tech',
+        country: 'Brazil',
+        city: 'Remote',
+        salary: '$23,738'
+      },
       {
         name: 'Banco do Brasil Você Azul',
         country: 'Brazil',
         city: 'Remote',
         salary: '$35,738'
-      },
-      {
-        name: '2Mundos',
-        country: 'Brazil / USA',
-        city: 'São Paulo',
-        salary: '$23,738'
-      }, {
-        name: 'IBM',
-        country: 'Brazil',
-        city: 'São Paulo',
-        salary: '$56,142'
-      }, {
-        name: 'Tagview Tech',
-        country: 'Brazil',
-        city: 'Remote',
-        salary: '$38,735'
       }
     ]
-  })
+  }),
+  computed: {
+    color () {
+      return this.$store.state.app.color
+    }
+  }
 }
 </script>

@@ -133,7 +133,7 @@
             <p class="card-description font-weight-light">From the humble beginnings in 2012 as a front-end developer, I've always dreamed of being great. After studying computer engineering at UNIP and going deeper into the field of reinforcement learning, I began to study finance. My efforts to create an intuitive platform to help myself and others make a safer decision on daily trading are now a reality. </p>
             <a href="https://github.com/Draichi">
               <v-btn
-                color="success"
+                :color="color"
                 round
                 class="font-weight-light"
               >Follow</v-btn>
@@ -147,6 +147,10 @@
 
 <script>
 export default {
-  //
+  computed: {
+    color () {
+      return this.$store.state.app.color
+    }
+  }
 }
 </script>

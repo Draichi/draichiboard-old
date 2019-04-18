@@ -12,9 +12,9 @@
         xs12
       >
         <material-card
-          color="orange"
-          title="Professional Stats"
-          text="Most important jobs"
+          :color="color"
+          title="Live Projects"
+          text="Some of the main projects"
         >
           <v-data-table
             :headers="headers"
@@ -36,9 +36,16 @@
             >
               <td>{{ index + 1 }}</td>
               <td>{{ item.name }}</td>
-              <td class="text-xs-right">{{ item.salary }}</td>
-              <td class="text-xs-right">{{ item.country }}</td>
-              <td class="text-xs-right">{{ item.city }}</td>
+              <td class="text-xs-right">{{ item.project }}</td>
+              <td class="text-xs-right">
+                <a
+                  :href="item.link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {{ item.link }}
+                </a>
+              </td>
             </template>
           </v-data-table>
         </material-card>
@@ -58,52 +65,52 @@ export default {
       },
       {
         sortable: false,
-        text: 'Company',
+        text: 'Project',
         value: 'name'
       },
       {
         sortable: false,
-        text: 'Salary',
-        value: 'salary',
+        text: 'Description',
+        value: 'project',
         align: 'right'
       },
       {
         sortable: false,
-        text: 'Country',
-        value: 'country',
-        align: 'right'
-      },
-      {
-        sortable: false,
-        text: 'City',
-        value: 'city',
+        text: 'Link',
+        value: 'link',
         align: 'right'
       }
     ],
     items: [
       {
-        name: 'Banco do Brasil Você Azul',
-        country: 'Brazil',
-        city: 'Remote',
-        salary: '$35,738'
-      },
-      {
-        name: '2Mundos',
-        country: 'Brazil / USA',
-        city: 'São Paulo',
-        salary: '$23,738'
+        name: 'ABC Mouse (2Mundos)',
+        link: 'https://www.abcmouse.com/',
+        project: 'API developed in PHP'
       }, {
-        name: 'IBM',
-        country: 'Brazil',
-        city: 'São Paulo',
-        salary: '$56,142'
+        name: 'Bud Fox',
+        link: 'https://bud-fox.github.io/live/',
+        project: 'Nutx.js and Flask API'
       }, {
         name: 'Tagview Tech',
-        country: 'Brazil',
-        city: 'Remote',
-        salary: '$38,735'
+        link: 'https://www.mudamos.org/',
+        project: 'Website in Ruby on Rails'
+      },
+      {
+        name: 'Metups',
+        link: 'https://meetupsproject.firebaseapp.com/',
+        project: 'Vue.js and Firebase API'
+      },
+      {
+        name: 'Reinforcement Learning',
+        link: 'https://draichi.github.io/ai-flappy-bird/index.html',
+        project: 'Flappy Bird in Javascript'
       }
     ]
-  })
+  }),
+  computed: {
+    color () {
+      return this.$store.state.app.color
+    }
+  }
 }
 </script>

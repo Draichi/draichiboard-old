@@ -110,11 +110,6 @@ export default {
         to: '/live-projects',
         icon: 'mdi-cube-outline',
         text: 'Live Projects'
-      },
-      {
-        to: '/notifications',
-        icon: 'mdi-bell',
-        text: 'Notifications'
       }
     ],
     responsive: false

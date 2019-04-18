@@ -3,7 +3,7 @@
     fill-height
     fluid
   >
-     <v-layout>
+    <v-layout>
       <v-flex xs12>
         <v-card>
           <v-container
@@ -27,25 +27,25 @@
                 >
                   <v-img
                     :src="item.src"
-                    @click.stop="item.dialog = true"
                     aspect-ratio="1"
                     class="grey lighten-2"
-                  ></v-img>
+                    @click.stop="item.dialog = true"
+                  />
                 </v-card>
                 <v-dialog
-                  v-model="item.dialog"
                   v-show="false"
+                  v-model="item.dialog"
                   max-width="540"
                 >
                   <v-card>
                     <v-img
                       :src="item.src"
-                      @click.stop="item.dialog = true"
                       class="grey lighten-2"
-                    ></v-img>
-                    <v-divider></v-divider>
+                      @click.stop="item.dialog = true"
+                    />
+                    <v-divider/>
                     <v-card-actions>
-                      <v-spacer></v-spacer>
+                      <v-spacer/>
                       <v-btn
                         :color="color"
                         @click="item.dialog = false"

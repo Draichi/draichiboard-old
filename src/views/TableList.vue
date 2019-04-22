@@ -69,7 +69,7 @@ export default {
       },
       {
         sortable: false,
-        text: 'Annual Salary (BRL)',
+        text: 'Annual Salary (USD)',
         value: 'salary',
         align: 'right'
       }
@@ -79,25 +79,25 @@ export default {
         name: '2Mundos',
         country: 'Brazil / USA',
         city: 'São Paulo',
-        salary: '$56,142'
+        salary: '$14,258'
       },
       {
         name: 'IBM',
         country: 'Brazil / USA',
         city: 'São Paulo',
-        salary: '$38,735'
+        salary: '$11,675'
       },
       {
         name: 'Tagview Tech',
         country: 'Brazil',
         city: 'Remote',
-        salary: '$23,738'
+        salary: '$9,738'
       },
       {
         name: 'Banco do Brasil Você Azul',
         country: 'Brazil',
         city: 'Remote',
-        salary: '$35,738'
+        salary: '$9,848'
       }
     ]
   }),

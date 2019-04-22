@@ -48,7 +48,7 @@ export default {
       .then(res => {
         let resData1 = res.data[1]
         commit('setCryptoPredictionStats', resData1)
-        weeks = res.data[1].weeks
+        let weeks = resData1.weeks
         for (let key in weeks) {
           let date = new Date(weeks[key].w * 1000)
           cryptoPredictionAdditions.labels.push(date)

@@ -1,11 +1,11 @@
 // https://vuex.vuejs.org/en/state.html
 
 export default {
-  loading: false,
+  loading: true,
   portfolioList: {full_name: null, created_at: null, updated_at: null},
   cryptoPrediction: {full_name: null, created_at: null, updated_at: null},
-  portfolioListStats: {total: null},
+  portfolioListStats: {total: 10},
   portfolioContributors: {},
-  cryptoPredictionStats: {total: null},
+  cryptoPredictionStats: {total: 10},
   cryptoPredictionContributors: {}
 }

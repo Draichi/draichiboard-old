@@ -3,7 +3,6 @@ import axios from 'axios'
 
 export default {
   getGuthubData ({commit}) {
-    commit('setLoading', true)
     let cryptoPredictionAdditions = {labels: [], series: [[]]}
     let cryptoPredictionDeletions = {labels: [], series: [[]]}
     let cryptoPredictionCommits = {labels: [], series: [[]]}
@@ -64,6 +63,6 @@ export default {
           commits: cryptoPredictionCommits
         })
       })
-    commit('setLoading', false)
+    // commit('setLoading', false)
   }
 }

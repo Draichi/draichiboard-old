@@ -474,7 +474,10 @@ export default {
     cryptoPredictionContributors () {
       return this.$store.getters.cryptoPredictionContributors
     }
-  }
+  },
+  created() {
+    setTimeout(this.$store.commit('setLoading', false), 3000)
+  },
 }
 </script>
 

@@ -475,9 +475,13 @@ export default {
       return this.$store.getters.cryptoPredictionContributors
     }
   },
-  created() {
-    setTimeout(this.$store.commit('setLoading', false), 3000)
-  },
+  // created() {
+  //   function setLoading() {
+  //     // this.$store.commit('setLoading', false)
+  //     console.log(this)
+  //   }
+  //   setTimeout(setLoading, 3000)
+  // }
 }
 </script>
 

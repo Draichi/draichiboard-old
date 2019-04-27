@@ -63,6 +63,8 @@ export default {
           commits: cryptoPredictionCommits
         })
       })
-    // commit('setLoading', false)
+      .finally(() => {
+        commit('setLoading', false)
+      })
   }
 }

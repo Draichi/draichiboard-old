@@ -474,14 +474,7 @@ export default {
     cryptoPredictionContributors () {
       return this.$store.getters.cryptoPredictionContributors
     }
-  },
-  // created() {
-  //   function setLoading() {
-  //     // this.$store.commit('setLoading', false)
-  //     console.log(this)
-  //   }
-  //   setTimeout(setLoading, 3000)
-  // }
+  }
 }
 </script>
 

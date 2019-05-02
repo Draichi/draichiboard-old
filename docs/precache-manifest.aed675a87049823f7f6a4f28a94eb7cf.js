@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/draichiboard/js/chunk-0219b736.d588b950.js"
   },
   {
-    "revision": "f76a3a3ca3f70d2272895146a479bbbc",
+    "revision": "c9bfff752ff0344a6b3fc4bb28c6970e",
     "url": "/draichiboard/index.html"
   },
   {

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/draichiboard/precache-manifest.d9e321245fdce9fc33d6a5821b950426.js"
+  "/draichiboard/precache-manifest.aed675a87049823f7f6a4f28a94eb7cf.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "draichiboard"});

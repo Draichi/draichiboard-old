@@ -5,7 +5,7 @@
  */
 export default [
   {
-    path: '/draichiboard',
+    path: '/draichiboard-old',
     view: 'Dashboard'
   },
   {

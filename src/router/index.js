@@ -31,7 +31,7 @@ Vue.use(Router)
 const router = new Router({
   mode: 'history',
   routes: paths.map(path => route(path.path, path.view, path.name)).concat([
-    { path: '*', redirect: '/draichiboard' }
+    { path: '*', redirect: '/draichiboard-old' }
   ]),
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
